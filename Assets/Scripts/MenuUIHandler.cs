@@ -14,10 +14,7 @@ public class MenuUIHandler : MonoBehaviour
 
     public void NewColorSelected(Color color)
     {
-        PlayerPrefs.SetFloat("PlayerColorR", color.r);
-        PlayerPrefs.SetFloat("PlayerColorG", color.g);
-        PlayerPrefs.SetFloat("PlayerColorB", color.b);
-        PlayerPrefs.Save();
+        MainManager.Instance.teamColor = color;
     }
     
     private void Start()
@@ -25,15 +22,6 @@ public class MenuUIHandler : MonoBehaviour
         ColorPicker.Init();
         //this will call the NewColorSelected function when the color picker have a color button clicked.
         ColorPicker.onColorChanged += NewColorSelected;
-        if (PlayerPrefs.HasKey("PlayerColorR"))
-        {
-            float r = PlayerPrefs.GetFloat("PlayerColorR");
-            float g = PlayerPrefs.GetFloat("PlayerColorG");
-            float b = PlayerPrefs.GetFloat("PlayerColorB");
-            Color savedColor = new Color(r, g, b);    
-            ColorPicker.SelectColor(savedColor);
-
-        }
     }
 
     public void OnStartButtonClicked()
